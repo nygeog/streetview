@@ -17,6 +17,13 @@ symbol ###### for ['bikinj','bikkil','pedinj','pedkil'] Crashes with bicyclist i
 symbol ^^^^ for years 1995-2013 - including all years sum '1995_2013'. 
 
 
+
+
+### Kernel Densities (Radial buffers Zonal Statistics with Crash points Kernel Density grids):
+
+
+
+
 ### Tasks to do
 
 Update pedestrain proxy. up to 2009 for ALR. res dens. lu mix. 
