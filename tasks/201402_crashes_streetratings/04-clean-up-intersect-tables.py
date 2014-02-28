@@ -8,11 +8,7 @@ varn      = 'rated_intersections_crashes_int/'
 buf_dist = ['30','60','90'] #meters
 crash_ty = ['bik_inj','bik_kil','ped_inj','ped_kil']
 list_typesU = ['bikinj','bikkil','pedinj','pedkil']
-# all_fname = 'all_'+varn #cafedn'
-# csvext    = '.csv'
-# ax        = di + '/'+ all_fname
-# at        = ax + csvext
-
+di = td+varn
 
 # for bufdist in buf_dist:
 # 	for crashty in crash_ty:
@@ -52,8 +48,6 @@ for bufdist in buf_dist:
 		df = df.drop(cols, axis=1)
 		df.to_csv(di+geo+'_'+typesU+'.csv', index=True)
 
-
-
 di = td+varn
 
 print 'merge csvs'
@@ -83,25 +77,3 @@ for bufdist in buf_dist:
 		df[geo+typesU+'1995_2013'] = df[geo+typesU+'1995'] + df[geo+typesU+'1996'] + df[geo+typesU+'1997'] + df[geo+typesU+'1998'] + df[geo+typesU+'1999'] + df[geo+typesU+'2000'] + df[geo+typesU+'2001'] + df[geo+typesU+'2002'] + df[geo+typesU+'2003'] + df[geo+typesU+'2004'] + df[geo+typesU+'2005'] + df[geo+typesU+'2006'] + df[geo+typesU+'2007'] + df[geo+typesU+'2008'] + df[geo+typesU+'2009'] + df[geo+typesU+'2010'] + df[geo+typesU+'2011'] + df[geo+typesU+'2012'] + df[geo+typesU+'2013']
 
 df.to_csv(di+'all_crashes.csv', index=False)
-
-
-# ct['ctcntcafeall']  = ct['ctcntcafeenclosed']+ct['ctcntcafeunenclosed']
-# r1['r1cntcafeall']  = r1['r1cntcafeenclosed']+r1['r1cntcafeunenclosed']
-# n1['n1cntcafeall']  = n1['n1cntcafeenclosed']+n1['n1cntcafeunenclosed']
-# n2['n2cntcafeall']  = n2['n2cntcafeenclosed']+n2['n2cntcafeunenclosed']
-
-
-# merged = ag.merge(ct, how='outer', on='geoid').merge(r1, how='outer', on='msmuid').merge(n1, how='outer', on='msmuid').merge(n2, how='outer', on='msmuid')
-# merged.to_csv(td+varn+'/all_'+varn+'.csv', index=False)
-
-# print 'add percent ---- fields'
-# df = pd.read_csv(at)
-# # for geo in geos:
-# # 	df[geo+'treepcthoodcanopy'] = df[geo+'treecanopyareasqmtr']/df[geo+'areasqmtr']
-
-# df = df.drop('geoid', axis = 1)
-# for geo in geos:
-# 	df = df.drop(geo+'areasqmtr', axis = 1)
-# 	df = df.fillna(0)
-
-# df.to_csv(ax + '_pct.csv', index='False')

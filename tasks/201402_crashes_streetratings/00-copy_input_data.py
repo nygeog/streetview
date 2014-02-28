@@ -12,5 +12,6 @@ def copyanything(src, dst):
             shutil.copy(src, dst)
         else: raise
 
-copyanything('/Users/danielmsheehan/Dropbox/GIS/Data/Municipal/USA/New_York/New_York_City/Crashes/crashes.gdb', '/Volumes/Echo/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/input/crashes/crashes.gdb')
+#copyanything('/Users/danielmsheehan/Dropbox/GIS/Data/Municipal/USA/New_York/New_York_City/Crashes/crashes.gdb', '/Volumes/Echo/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/input/crashes/crashes.gdb')
 
+copyanything('/Users/danielmsheehan/Dropbox/GIS/Data/Municipal/USA/New_York/New_York_City/Borough_Boundary'   , '/Volumes/Echo/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/input/borough_boundary')
