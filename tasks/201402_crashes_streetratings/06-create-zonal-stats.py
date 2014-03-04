@@ -3,9 +3,12 @@ from arcpy import env
 env.overwriteOutput = True
 
 proj_path = "V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/"
+proj_path = "U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/"
+
+prjdir = proj_path+'data'
 pp = proj_path
 pd = pp + 'data'
-prjdir = 'V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data'
+
 inpdir = prjdir + '/input'
 prodir = prjdir + '/processing'
 tabdir = prjdir + '/tables'
@@ -21,17 +24,18 @@ alyears     = ['1995_2013']
 years       = alyears + siyears
 crashtypes = ['bik_inj','bik_kil','ped_inj','ped_kil']
 
-print 'zonal stats on the non-overlapping features'
-buf_dist = ['30','60','90']
-for buf in buf_dist:
-	for crashtype in crashtypes:
-		for i in years:
-			i_s  = str(i)
-			arcpy.gp.ZonalStatisticsAsTable_sa(int_r_buf+buf+'_dis_erase_ov.shp',"segmid",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/zonal_stats.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
-			print buf + crashtype + i_s + ' is done...' + time.strftime('%c') 
+# print 'zonal stats on the non-overlapping features'
+# buf_dist = ['30','60','90']
+# for buf in buf_dist:
+# 	for crashtype in crashtypes:
+# 		for i in years:
+# 			i_s  = str(i)
+# 			arcpy.gp.ZonalStatisticsAsTable_sa(int_r_buf+buf+'_dis_erase_ov.shp',"segmid",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/zonal_stats.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
+# 			print buf + crashtype + i_s + ' is done...' + time.strftime('%c') 
 
 #What's next is to just do the inputs that were put into the bufs gdbs (these are the splits)
 #put them in the processing r30_split, r60_split, r90_split, then figure out how to merge the tables/data. 
+
 
 print 'now zonal stats on the features that overlap'
 siyears     = range(1995, 2014)
@@ -47,7 +51,7 @@ for x in fcList:
 	for crashtype in crashtypes:
 		for i in years:
 			i_s  = str(i)
-			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmid",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
+			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmidtext",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
 	print x + ' is done...' + time.strftime('%c') 
 
 buf = '60'
@@ -59,7 +63,7 @@ for x in fcList:
 	for crashtype in crashtypes:
 		for i in years:
 			i_s  = str(i)
-			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmid",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
+			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmidtext",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
 	print x + ' is done...' + time.strftime('%c') 
 
 buf = '90'
@@ -71,7 +75,7 @@ for x in fcList:
 	for crashtype in crashtypes:
 		for i in years:
 			i_s  = str(i)
-			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmid",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
+			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmidtext",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
 	print x + ' is done...' + time.strftime('%c') 
 
 
@@ -84,7 +88,7 @@ alyears     = ['1995_2013']
 years       = alyears + siyears
 buf_dist = ['30','60','90']
 
-path = "V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r"
+path = "U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r"
 mid  = '_split.gdb/'
 
 for buf in buf_dist:
@@ -99,7 +103,7 @@ for buf in buf_dist:
 				inFCs.append(path+buf+mid+i.encode("utf-8") + '_' + crashtype + '_' + year + '_zon')
 			
 			print inFCs
-			arcpy.Merge_management(inFCs, "V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/zonal_stats_splits_merged.gdb/r"+buf+'_'+crashtype+'_'+year)
+			arcpy.Merge_management(inFCs, "U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/zonal_stats_splits_merged.gdb/r"+buf+'_'+crashtype+'_'+year)
 
 
 			print buf + crashtype + year

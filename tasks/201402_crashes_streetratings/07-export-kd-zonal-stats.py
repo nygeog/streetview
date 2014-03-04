@@ -2,7 +2,7 @@ import arcpy, time, datetime, csv, sys, traceback, os
 from arcpy import env
 env.overwriteOutput = True
 
-proj_path = "V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/"
+proj_path = "U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/"
 pp = proj_path
 pd = pp + 'data'
 

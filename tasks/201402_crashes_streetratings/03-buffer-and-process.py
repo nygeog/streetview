@@ -1,5 +1,6 @@
 import arcpy, csv
 prjdir = 'V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data'
+prjdir = 'U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data'
 
 inpdir = prjdir + '/input'
 prodir = prjdir + '/processing'
@@ -22,9 +23,9 @@ for bufdist in buf_dist:
 
 
 #SPLIT ALL DELETE THIS CODE!!!! DNU DNU
-# arcpy.Split_analysis("r90_dis","r90_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r90_split.gdb","#")
-# arcpy.Split_analysis("r60_dis","r60_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r60_split.gdb","#")
-# arcpy.Split_analysis("r30_dis","r30_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r30_split.gdb","#")
+arcpy.Split_analysis("r90_dis","r90_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r90_split.gdb","#")
+arcpy.Split_analysis("r60_dis","r60_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r60_split.gdb","#")
+arcpy.Split_analysis("r30_dis","r30_dis","segmidtext","V:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/r30_split.gdb","#")
 
 #Intersect1Input,Dissolve,EraseSourcewithDissolveasErase,Splittheintersectbyfeatures(split on itseflt ), run erase fc and alsop all the split feautres
 for bufdist in buf_dist:
@@ -34,7 +35,24 @@ for bufdist in buf_dist:
 for bufdist in buf_dist:
 	arcpy.Erase_analysis(int_r_buf+bufdist+'_dis.shp', int_r_buf+bufdist+'_dis_intself_dis.shp', int_r_buf+bufdist+'_dis_erase_ov.shp')
 for bufdist in buf_dist:
-	arcpy.Split_analysis(int_r_buf+bufdist+'_dis_intself.shp',int_r_buf+bufdist+'_dis_intself.shp',"segmidtext",inpdir + '/rated_intersections/r'+bufdist+'.gdb/',"#")
+	arcpy.Dissolve_management(int_r_buf+bufdist+'_dis_intself.shp', int_r_buf+bufdist+'_dis_intself_dis_segmid.shp',"segmidtext")
+
+print 'select unique attributes and export for segmidtext'
+for bufdist in buf_dist:
+	fc = int_r_buf+bufdist+'_dis_intself_dis_segmid.shp'
+	srows = arcpy.SearchCursor(fc)
+	attList = []
+	for srow in srows:
+		uid = srow.getValue('segmidtext')
+		uid = uid.encode('UTF8')
+		attList.append(uid)
+		print uid
+	print attList
+
+	for item in attList:
+		exp = '"segmidtext" = '+"'"+item+"'"
+		arcpy.Select_analysis(fc, inpdir + '/rated_intersections/r'+bufdist+'.gdb/'+item, exp)
+		print 'selecting ' + item + ' of ' + bufdist
 
 
 
