@@ -78,10 +78,6 @@ for x in fcList:
 			arcpy.gp.ZonalStatisticsAsTable_sa(pd+"/input/rated_intersections/r"+buf+".gdb/"+x,"segmidtext",pd+'/processing/kd.gdb/crashes_'+crashtype+'_'+i_s+'_kd',pd+'/processing/r'+buf+'_split.gdb/'+x+'_'+crashtype+'_'+i_s+'_zon',"DATA","ALL")
 	print x + ' is done...' + time.strftime('%c') 
 
-
-
-
-
 print 'now time to merge all the split zonal stats tables into one table per year per crash type'
 siyears     = range(1995, 2014)
 alyears     = ['1995_2013']
@@ -103,9 +99,31 @@ for buf in buf_dist:
 				inFCs.append(path+buf+mid+i.encode("utf-8") + '_' + crashtype + '_' + year + '_zon')
 			
 			print inFCs
-			arcpy.Merge_management(inFCs, "U:/GIS/projects/streetview/tasks/201402_crashes_streetratings/data/processing/zonal_stats_splits_merged.gdb/r"+buf+'_'+crashtype+'_'+year)
+			outTable = pd+"/processing/zonal_stats_splits_merged.gdb/r"+buf+'_'+crashtype+'_'+year+'_zon'
+			arcpy.Merge_management(inFCs, outTable)
+			arcpy.AddField_management(outTable, 'SEGMID', "LONG")
+			arcpy.CalculateField_management(outTable, 'SEGMID', """int(!SEGMIDTEXT![1:])""","PYTHON_9.3")
+			arcpy.DeleteField_management(outTable, ['SEGMIDTEXT','ZONE_CODE'])
 
 
 			print buf + crashtype + year
 
+print 'merge the zonal stats and the zonal stats splits merged'
+buf_dist = ['30','60','90']
+for buf in buf_dist:
+	for crashtype in crashtypes:
+		for i in years:
+			i_s  = str(i)
+			inTables = pd+'/processing/zonal_stats_splits_merged.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon;'+pd+'/processing/zonal_stats.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon'
+			outTable = pd+'/processing/zonal_stats_all_zonal_stats_with_splits.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon'
+			arcpy.Merge_management(inTables, outTable,"#")
 
+print 'sum stats the zonal stats and the zonal stats splits merged'
+buf_dist = ['30','60','90']
+for buf in buf_dist:
+	for crashtype in crashtypes:
+		for i in years:
+			i_s  = str(i)
+			inTable = pd+'/processing/zonal_stats_all_zonal_stats_with_splits.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon'
+			outTable = pd+'/processing/zonal_stats_all_zonal_stats_with_splits.gdb/r'+buf+'_'+crashtype+'_'+i_s+'_zon_stat'
+			arcpy.Statistics_analysis(inTable,outTable,"COUNT SUM;AREA SUM;MIN MIN;MAX MAX;SUM SUM","SEGMID")
