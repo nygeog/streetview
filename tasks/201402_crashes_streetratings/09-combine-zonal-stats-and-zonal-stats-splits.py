@@ -29,7 +29,7 @@ for year in years:
 
 			concatenated.to_csv(td+'kd_all/'+'r'+bufdist+'_'+crashty+'_'+year+'_zon_stat.csv',index=False)
 
-			dfg = concatenated.groupby(by='segmid').sum()
+			dfg = concatenated.groupby(by='segmid').mean()
 
 			dfg.to_csv(td+'kd_all/'+'r'+bufdist+'_'+crashty+'_'+year+'_zon_stat_grp.csv',index=True)
 
