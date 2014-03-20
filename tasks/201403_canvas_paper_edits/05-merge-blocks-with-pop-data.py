@@ -17,3 +17,6 @@ merged = dfpop.merge(dfstreets, left_on=dfpopid, right_on=dfstreetsid, how='righ
 merged = merged.drop(['ObjectID','STATE_FIPS','CNTY_FIPS','STCOFIPS','TRACT','BLOCK','STATEFP00','COUNTYFP00','TRACTCE00','BLOCKCE00'], axis=1)
 
 merged.to_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/processing/streets_right_40_feet_blocks_2000_select_with_pop.csv', index=False)
+
+justFIPS = merged.drop(['POP2000','HOUSEHOLDS','HSE_UNITS','SAMPNUMB','BLKIDFP00'], axis=1)
+justFIPS.to_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/processing/just_blocks_2000.csv', index=False, header=False)
