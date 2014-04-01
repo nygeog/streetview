@@ -4,7 +4,7 @@ env.overwriteOutput = True
 
 out_path = 'V:/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/input/nationalsample.gdb'
 
-in_rows  = 'V:/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/mikes_review/NationalSample.csv'
+in_rows  = 'V:/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/input/_original/NationalSample.csv'
 out_name = 'nationalsample'
 
 arcpy.TableToTable_conversion(in_rows, out_path, out_name)
