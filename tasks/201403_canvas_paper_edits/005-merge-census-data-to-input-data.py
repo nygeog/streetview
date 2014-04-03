@@ -2,7 +2,7 @@ import pandas as pd
 
 dfnat = pd.read_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/input/_original/NationalSample.csv')
 
-dfblo = pd.read_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/misc/list_of_blocks.csv', dtype={'BLKIDFP00': object})
+dfblo = pd.read_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/misc/list_of_blocks.csv', dtype={'BLKIDFP00': object, 'STATEFP00': object,'COUNTYFP00': object,'TRACTCE00': object,'BLOCKCE00': object})
 
 dfcen = pd.read_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/input/census/census_2010_block.csv', dtype={'geoid': object})
 
