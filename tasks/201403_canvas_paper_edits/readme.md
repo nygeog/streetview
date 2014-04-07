@@ -26,14 +26,12 @@ Okay - so this brings up some ‘joy’ on Census boundaries being based off str
 I’ll need to do some digging (I found that 2nd round so I can start too look in that 1st round of random points) but I think the first intersect was done with Esri 2000 Tracts. Some of these make sense if the Esri tracts were used rather than the Tiger lines for 2000 (released later 2009,2010).
 
 <pre><code>
-
 156 segment falls in 111601 - right 20 feet falls in 111501
 175 segment falls in 160900 - right 20 feet falls in 160400
 207 segment intersects 007431 but right 20 feet and straight distance b/n XY segment falls in 007430
 219 should be in 470300 both segment and right 20 feet point
 224 right 20 feet point should be in 252607 but both segment and right 20 feet point fall in 252608 (70 foot wide road). 
 232 segment is in 2000 Tract from Esri 005100 but US Census 2000 004700 - all should be in 004700. 
-
 </pre></code>
 
 I could either 1) ID the blocks that would have been selected on the first round and send over those Census variables or 2) send Tract variables for the correct (with the right 20 foot distance) tracts. 
