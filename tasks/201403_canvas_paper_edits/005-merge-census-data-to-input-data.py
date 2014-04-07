@@ -9,6 +9,11 @@ dfcen = pd.read_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_p
 
 merged1 = dfblo.merge(dfcen, left_on='BLKIDFP00', right_on='geoid', how='left')
 
-merged1 = merged1.drop(['XCoord','YCoord'], axis=1)
+merged1 = merged1.drop(['XCoord','YCoord','ALAND00','AWATER00'], axis=1)
+
+merged1['STATEFP00']  = merged1['BLKIDFP00'].str[:2]
+merged1['COUNTYFP00'] = merged1['BLKIDFP00'].str[2:5]
+merged1['TRACTCE00']  = merged1['BLKIDFP00'].str[5:11]
+merged1['BLOCKCE00']  = merged1['BLKIDFP00'].str[11:15]
 
 merged1.to_csv('/Volumes/Echo/GIS/projects/streetview/tasks/201403_canvas_paper_edits/data/processing/streets_right_40_feet_blocks_2000_select_with_pop_census_data.csv', index=False)
