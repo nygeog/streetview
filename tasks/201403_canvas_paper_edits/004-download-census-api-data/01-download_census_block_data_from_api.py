@@ -69,7 +69,9 @@ listofcensusvars= [
 "P004008",
 "P004009",
 "P004010",
-"P004011"
+"P004011",
+"AREALAND",
+"AREAWATR"
 ]
 
 for state, county, tract in zip(statelist, countylist, tractlist):
