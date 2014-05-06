@@ -2,13 +2,13 @@ import arcpy, time, datetime, csv, sys, traceback, os
 from arcpy import env
 env.overwriteOutput = True
 
-gdb = 'W:/GIS/Data/Esri/CrimeIndexData2010/Data/BGCrimeIndex2010.gdb/'
+gdb = 'V:/GIS/projects/streetview/tasks/201405_crime/data/input/crime/esri.gdb/'
 odr = 'V:/GIS/projects/streetview/tasks/201405_crime/data/tables/'
 
-item = 'CRIME10_BG'
+item = 'crime2010_bg'
 
 table   = gdb + item
-outfile = odr + item.lower() + "_raw.csv"      
+outfile = odr + item + "_raw.csv"      
 
 #--first lets make a list of all of the fields in the table
 fields = arcpy.ListFields(table)
