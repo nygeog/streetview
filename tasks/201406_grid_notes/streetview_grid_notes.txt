@@ -1,0 +1,78 @@
+Streetview file updates:
+
+1) Add Corpus Christi
+	meaning we now have 
+	M1. New York City/Newark
+	M2. Detroit
+	M3. San Jose
+	M4. Philadelphia
+	M5. Corpus Christi
+
+2) Compare counts of FF in municipal boundaries versus CSA's as well as the number of grids
+
+
+3) Grids:
+
+from now on I'll refer to them in meters (0500 - 0.5 km, 1000 - 1 km, 2000 - 2 km)
+
+0500 m grid FF respondents KD test different values 0.85-1 at .05 incriments - counts of both the respondents and the # of grid points
+	Table of KD's for each city
+	KD value 	FF points	0.5 km grid points
+	0.85
+	0.90
+	0.95
+	1.00
+
+
+1000 m grid
+Population Density Quartiles (based on Metro Area, not just city):
+
+Top Quartile - 1 km grid (top 25% density)
+2nd Quartile - 2 km grid
+3rd Quartile - 2 km grid
+4th Quartile - 2 km grid
+
+2000 m grid
+
+
+MENTION THAT I REMOVED A NAT'L LEVEL WATERSET
+
+
+
+Bader:
+
+
+philadelphia centriods of all street blocks - might need to check with philly GIS
+
+
+
+
+projection to be same projection for streets WGS_84 (?)
+
+
+not in lat/long but meters from some standard reference point
+UTM
+
+streetview grid needs to be sent not in lat/long but meters (UTM?)
+
+
+what we need is do you know anything about krigging, what we wannna do is find some way for steve to pass me the points at which the streetview actually occurred. i gave steve a point, some matched, soem didnt some matched off by a certian threshold, so steve needs to send me these points. From that, what we need is a database of lats and longs, projection in a linear unit, (UTM or a State Plane). State Plane (find a state Plane layer) in addition for points observed....to create grid for krigging. 
+
+create census block centroids as our mesh. X,Y's and send to Bader,Steve
+
+MatLab  
+
+-----------
+-----------
+
+Output
+Steves stuff in State Plane
+census block centroids in state plane 
+
+create city plus a buffer for the blocks 5 km buffer, indicate which kilometer distance it falls in. distance from city. for the centroid. 
+
+2010 block boundaries
+
+
+later:
+intersect the fragile families locations and aggregate within the buffers. 
